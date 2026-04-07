@@ -26,6 +26,20 @@ local function getCwebpPath()
     end
 end
 
+local VALID_PRESETS  = { default=true, photo=true, picture=true, drawing=true, icon=true, text=true }
+local VALID_METADATA = { all=true, exif=true, xmp=true, icc=true, none=true }
+
+--- Sanitize a shell argument: reject anything outside safe characters.
+-- @param value  string
+-- @return string  sanitized value, or nil if invalid
+local function sanitize(value)
+    local s = tostring(value)
+    if s:find("[^%w%.%-_]") then
+        return nil
+    end
+    return s
+end
+
 --- Build the cwebp command-line arguments from export settings.
 -- @param srcPath   string  source image file (TIFF/JPEG from LR)
 -- @param dstPath   string  destination .webp file
@@ -35,17 +49,39 @@ local function buildCommand(srcPath, dstPath, settings)
     local cwebp = getCwebpPath()
     local args  = {}
 
+    local quality = tonumber(settings.webp_quality)
+    if not quality or quality < 0 or quality > 100 then
+        quality = 80
+    end
+    quality = math.floor(quality)
+
+    local preset = tostring(settings.webp_preset)
+    if not VALID_PRESETS[preset] then
+        preset = "photo"
+    end
+
+    local method = tonumber(settings.webp_method)
+    if not method or method < 0 or method > 6 then
+        method = 4
+    end
+    method = math.floor(method)
+
     if settings.webp_lossless then
         args[#args + 1] = "-lossless"
     else
-        args[#args + 1] = "-q " .. tostring(settings.webp_quality)
+        args[#args + 1] = "-q " .. tostring(quality)
     end
 
-    args[#args + 1] = "-preset " .. settings.webp_preset
-    args[#args + 1] = "-m " .. tostring(settings.webp_method)
+    args[#args + 1] = "-preset " .. preset
+    args[#args + 1] = "-m " .. tostring(method)
 
-    if settings.webp_metadata ~= "none" then
-        args[#args + 1] = "-metadata " .. settings.webp_metadata
+    local metadata = tostring(settings.webp_metadata)
+    if not VALID_METADATA[metadata] then
+        metadata = "all"
+    end
+
+    if metadata ~= "none" then
+        args[#args + 1] = "-metadata " .. metadata
     end
 
     if WIN_ENV then
@@ -87,13 +123,13 @@ function WebPExporter.processRenderedPhotos(functionContext, exportContext)
             local result = LrTasks.execute(cmd)
 
             if result ~= 0 then
-                logger:error("cwebp failed with code " .. tostring(result) .. " for " .. srcPath)
+                logger:error("cwebp failed with code " .. tostring(result) .. " for " .. LrPathUtils.leafName(srcPath))
                 rendition:renditionIsDone(false, "WebP conversion failed (code " .. tostring(result) .. ")")
             else
                 -- Remove the intermediate file (TIFF/JPEG) from LR
                 LrFileUtils.delete(srcPath)
                 rendition:renditionIsDone(true, dstPath)
-                logger:info("Converted: " .. dstPath)
+                logger:info("Converted: " .. LrPathUtils.leafName(dstPath))
             end
         end
 
