@@ -48,13 +48,15 @@ local function buildCommand(srcPath, dstPath, settings)
         args[#args + 1] = "-metadata " .. settings.webp_metadata
     end
 
-    args[#args + 1] = '"' .. srcPath .. '"'
-    args[#args + 1] = "-o"
-    args[#args + 1] = '"' .. dstPath .. '"'
-
     if WIN_ENV then
-        return '"' .. cwebp .. '" ' .. table.concat(args, " ")
+        args[#args + 1] = '"' .. srcPath:gsub("/", "\\") .. '"'
+        args[#args + 1] = "-o"
+        args[#args + 1] = '"' .. dstPath:gsub("/", "\\") .. '"'
+        return '""' .. cwebp:gsub("/", "\\") .. '" ' .. table.concat(args, " ") .. '"'
     else
+        args[#args + 1] = '"' .. srcPath .. '"'
+        args[#args + 1] = "-o"
+        args[#args + 1] = '"' .. dstPath .. '"'
         return '"' .. cwebp .. '" ' .. table.concat(args, " ")
     end
 end
