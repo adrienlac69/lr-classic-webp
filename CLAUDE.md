@@ -51,6 +51,12 @@ photo-toolbox-webp.lrdevplugin/
     └── fr.lua                # French strings
 ```
 
+## Distribution
+- **GitHub Release:** [v1.0.0](https://github.com/adrienlac69/lr-classic-webp/releases/tag/v1.0.0)
+- **ZIP URL:** `https://github.com/adrienlac69/lr-classic-webp/releases/download/v1.0.0/photo-toolbox-webp-v1.0.0.zip`
+- **Checksum:** `SHA256: 64245a80ea1b4b658bd226416347768b2c1df7e98a9677734bc29d51635595e6`
+- **Published:** 2026-04-07
+
 ## Build & Test
 - **Dev install:** Symlink or copy `.lrdevplugin` folder into LR Classic plugin directory
 - **macOS:** `~/Library/Application Support/Adobe/Lightroom/Modules/`
