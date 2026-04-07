@@ -8,9 +8,9 @@ export const metadata: Metadata = {
 
 const DOWNLOAD_URL = "/downloads/photo-toolbox-webp-v1.0.0.zip";
 const PLUGIN_VERSION = "1.0.0";
-const PLUGIN_SIZE = "~3.2 MB";
+const PLUGIN_SIZE = "1.4 MB";
 const SHA256 =
-  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+  "932afc2a6226ca4e5dd1b66fabda84980b83528dc088c5d27ff7bb543295c539";
 
 const steps = [
   {
