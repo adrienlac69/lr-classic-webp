@@ -98,6 +98,64 @@ function ExportDialog.sectionsForTopOfDialog(f, propertyTable)
                     },
                 },
             },
+
+            f:separator { fill_horizontal = 1 },
+
+            f:row {
+                f:static_text {
+                    title = "Resize:",
+                    alignment = "right",
+                    width = LrView.share "label_width",
+                },
+                f:checkbox {
+                    value = bind "webp_resize",
+                    title = "Limit maximum dimensions",
+                },
+            },
+
+            f:row {
+                f:static_text {
+                    title = "Max width (px):",
+                    alignment = "right",
+                    width = LrView.share "label_width",
+                    enabled = bind "webp_resize",
+                },
+                f:edit_field {
+                    value = bind "webp_max_width",
+                    width_in_chars = 6,
+                    enabled = bind "webp_resize",
+                    min = 0,
+                    max = 16383,
+                    increment = 1,
+                    precision = 0,
+                },
+                f:static_text {
+                    title = "0 = auto (preserve aspect ratio)",
+                    enabled = bind "webp_resize",
+                },
+            },
+
+            f:row {
+                f:static_text {
+                    title = "Max height (px):",
+                    alignment = "right",
+                    width = LrView.share "label_width",
+                    enabled = bind "webp_resize",
+                },
+                f:edit_field {
+                    value = bind "webp_max_height",
+                    width_in_chars = 6,
+                    enabled = bind "webp_resize",
+                    min = 0,
+                    max = 16383,
+                    increment = 1,
+                    precision = 0,
+                },
+                f:static_text {
+                    title = "0 = auto (preserve aspect ratio)",
+                    enabled = bind "webp_resize",
+                },
+            },
         },
     }
 end

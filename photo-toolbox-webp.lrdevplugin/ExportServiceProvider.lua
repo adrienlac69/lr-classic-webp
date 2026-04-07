@@ -22,6 +22,9 @@ exportServiceProvider.exportPresetFields      = {
     { key = "webp_method",     default = 4 },
     { key = "webp_lossless",   default = false },
     { key = "webp_metadata",   default = "all" },
+    { key = "webp_resize",     default = false },
+    { key = "webp_max_width",  default = 0 },
+    { key = "webp_max_height", default = 0 },
 }
 
 function exportServiceProvider.sectionsForTopOfDialog(f, propertyTable)
