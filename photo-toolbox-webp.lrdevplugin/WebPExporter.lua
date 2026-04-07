@@ -13,6 +13,8 @@ logger:enable("logfile")
 
 local WebPExporter = {}
 
+local quarantineCleared = false
+
 --- Resolve the platform-specific path to the bundled cwebp binary.
 -- @return string path to cwebp executable
 local function getCwebpPath()
@@ -24,6 +26,21 @@ local function getCwebpPath()
     else
         return LrPathUtils.child(LrPathUtils.child(binDir, "mac"), "cwebp")
     end
+end
+
+--- Remove macOS Gatekeeper quarantine attribute from the cwebp binary.
+-- Must be called once before the first cwebp invocation.
+local function ensureGatekeeperCleared()
+    if WIN_ENV or quarantineCleared then
+        return
+    end
+    local cwebp = getCwebpPath()
+    -- Remove quarantine extended attribute so macOS allows execution
+    LrTasks.execute('xattr -dr com.apple.quarantine "' .. cwebp .. '" 2>/dev/null')
+    -- Ensure the binary is executable
+    LrTasks.execute('chmod +x "' .. cwebp .. '" 2>/dev/null')
+    quarantineCleared = true
+    logger:info("Gatekeeper quarantine cleared for cwebp")
 end
 
 local VALID_PRESETS  = { default=true, photo=true, picture=true, drawing=true, icon=true, text=true }
@@ -107,6 +124,20 @@ function WebPExporter.processRenderedPhotos(functionContext, exportContext)
             or  LOC("$$$/WebP/Export/ProgressOne=Converting 1 photo to WebP"),
     }
 
+    -- Verify cwebp binary exists
+    local cwebp = getCwebpPath()
+    if not LrFileUtils.exists(cwebp) then
+        LrDialogs.message(
+            LOC("$$$/WebP/Export/ErrorTitle=WebP Export Error"),
+            LOC("$$$/WebP/Export/ErrorNoBinary=cwebp binary not found. Please reinstall the plugin."),
+            "critical"
+        )
+        return
+    end
+
+    -- Clear macOS Gatekeeper quarantine on first run
+    ensureGatekeeperCleared()
+
     for i, rendition in exportContext:renditions { stopIfCanceled = true } do
         progressScope:setPortionComplete(i - 1, nPhotos)
 
@@ -124,7 +155,11 @@ function WebPExporter.processRenderedPhotos(functionContext, exportContext)
 
             if result ~= 0 then
                 logger:error("cwebp failed with code " .. tostring(result) .. " for " .. LrPathUtils.leafName(srcPath))
-                rendition:renditionIsDone(false, "WebP conversion failed (code " .. tostring(result) .. ")")
+                rendition:renditionIsDone(false,
+                    "WebP conversion failed (code " .. tostring(result) .. "). "
+                    .. "If macOS blocked cwebp, run in Terminal:\n"
+                    .. "xattr -cr \"" .. _PLUGIN.path .. "\""
+                )
             else
                 -- Remove the intermediate file (TIFF/JPEG) from LR
                 LrFileUtils.delete(srcPath)
