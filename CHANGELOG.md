@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+- Update checker: calls `photo-toolbox.vercel.app/api/plugin/latest` on export dialog open
+- Shows Lightroom bezel notification when a newer version is available
+- Silent on network errors (double `LrTasks.pcall`)
+- Bundled `JSON.lua` (rxi/json.lua, MIT license) for JSON decoding
+
 ## [1.0.0] — 2026-04-07 — M1 Core Export Plugin
 
 ### Added

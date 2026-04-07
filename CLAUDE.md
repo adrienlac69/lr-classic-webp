@@ -41,6 +41,7 @@ photo-toolbox-webp.lrdevplugin/
 ├── ExportServiceProvider.lua # Export service entry point
 ├── ExportDialog.lua          # UI for export settings
 ├── WebPExporter.lua          # Core cwebp invocation logic
+├── JSON.lua                  # JSON decoder (rxi/json.lua, MIT)
 ├── bin/
 │   ├── mac/cwebp             # macOS arm64 binary (cwebp 1.4.0)
 │   └── win/cwebp.exe         # Windows x64 binary (cwebp 1.4.0)
