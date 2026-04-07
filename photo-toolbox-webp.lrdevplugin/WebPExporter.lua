@@ -101,6 +101,16 @@ local function buildCommand(srcPath, dstPath, settings)
         args[#args + 1] = "-metadata " .. metadata
     end
 
+    if settings.webp_resize then
+        local maxW = tonumber(settings.webp_max_width) or 0
+        local maxH = tonumber(settings.webp_max_height) or 0
+        maxW = math.max(0, math.min(16383, math.floor(maxW)))
+        maxH = math.max(0, math.min(16383, math.floor(maxH)))
+        if maxW > 0 or maxH > 0 then
+            args[#args + 1] = "-resize " .. tostring(maxW) .. " " .. tostring(maxH)
+        end
+    end
+
     if WIN_ENV then
         args[#args + 1] = '"' .. srcPath:gsub("/", "\\") .. '"'
         args[#args + 1] = "-o"

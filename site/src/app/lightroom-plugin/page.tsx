@@ -10,7 +10,7 @@ const DOWNLOAD_URL = "/downloads/photo-toolbox-webp-v1.0.0.zip";
 const PLUGIN_VERSION = "1.0.0";
 const PLUGIN_SIZE = "1.4 MB";
 const SHA256 =
-  "f78c7cf4be3cdfe2e4b2449ee52b55d5f340d4d3e2ff0418e709fd67be74590a";
+  "9a08b1a717e803161a23aff3780c1b58224f23e7cd85898033cb47b169d69e38";
 
 const steps = [
   {
