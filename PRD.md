@@ -9,15 +9,21 @@ A Lightroom Classic plugin that adds native WebP export capability by bundling t
 
 ## Milestones
 
-### M1 — Core Export Functionality
+### M1 — Core Export Functionality ✓ COMPLETE
 - [x] Plugin scaffold and Info.lua registration
 - [x] Export dialog with quality, preset, method, lossless, metadata controls
-- [ ] Bundle cwebp binaries (macOS arm64/x86_64 + Windows x64)
-- [ ] Working export: LR renders TIFF/JPEG → plugin converts to WebP via cwebp
-- [ ] Progress bar with cancel support
-- [ ] Error handling: missing binary, conversion failure, disk full
+- [x] Bundle cwebp 1.4.0 binaries (macOS arm64 + Windows x64)
+- [x] Working export: LR renders TIFF/JPEG → plugin converts to WebP via cwebp
+- [x] Progress bar with cancel support
+- [x] Error handling: conversion failure with error codes
+- [x] Security: input validation (whitelist presets/metadata, clamp numeric ranges)
+- [x] Security: log filenames only (no full paths with PII)
+- [x] Packaging: .lrplugin production build + ZIP distribution + SHA256 checksum
+- [x] Landing page at /lightroom-plugin with download CTA
+- [x] INSTALL.md with setup and troubleshooting guide
 
-### M2 — Polish & UX
+### M2 — Photo Toolbox Integration
+- [ ] Host ZIP download on Vercel (photo-toolbox.vercel.app)
 - [ ] Resize options (max dimension, percentage) passed to cwebp
 - [ ] Output folder picker (export to custom location)
 - [ ] File naming template support
@@ -26,12 +32,11 @@ A Lightroom Classic plugin that adds native WebP export capability by bundling t
 - [ ] Plugin icon (proper branded asset)
 
 ### M3 — Advanced & Distribution
-- [ ] Auto-update mechanism for cwebp binaries
 - [ ] AVIF export support (via `avifenc`)
+- [ ] Auto-update mechanism for cwebp binaries
 - [ ] Publish Service integration (re-export on change)
-- [ ] `.lrplugin` packaging script for distribution
 - [ ] Code-signing for macOS (notarization)
-- [ ] Documentation & landing page
+- [ ] Marketing page on Photo Toolbox site
 
 ## Technical Constraints
 - Lightroom SDK uses Lua 5.1 — no `goto`, limited standard library
