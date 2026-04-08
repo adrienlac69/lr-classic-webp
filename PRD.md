@@ -23,7 +23,7 @@ A Lightroom Classic plugin that adds native WebP export capability by bundling t
 - [x] INSTALL.md with setup and troubleshooting guide
 
 ### M2 — Photo Toolbox Integration
-- [x] Host ZIP download on Vercel (photo-toolbox.vercel.app)
+- [x] Host ZIP download on Vercel (www.photo-toolbox.fr)
 - [x] Update checker via `/api/plugin/latest` (silent on network errors)
 - [ ] Resize options (max dimension, percentage) passed to cwebp
 - [ ] Output folder picker (export to custom location)

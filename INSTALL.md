@@ -7,7 +7,7 @@
 
 ## Install the Plugin
 
-1. **Download** the latest release from [photo-toolbox.vercel.app](https://photo-toolbox.vercel.app/lightroom-plugin) and unzip it.
+1. **Download** the latest release from [www.photo-toolbox.fr](https://www.photo-toolbox.fr/lightroom-plugin) and unzip it.
 2. Open Lightroom Classic.
 3. Go to **File → Plug-in Manager**.
 4. Click **Add** and select the `photo-toolbox-webp.lrplugin` folder (or `.lrdevplugin` for the development version).
@@ -54,5 +54,5 @@ Then restart Lightroom.
 
 ## Links
 
-- Plugin page: [photo-toolbox.vercel.app/lightroom-plugin](https://photo-toolbox.vercel.app/lightroom-plugin)
+- Plugin page: [www.photo-toolbox.fr/lightroom-plugin](https://www.photo-toolbox.fr/lightroom-plugin)
 - Source: [github.com/adrienlac69/lr-classic-webp](https://github.com/adrienlac69/lr-classic-webp)
