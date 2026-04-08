@@ -48,7 +48,7 @@ No external dependencies — cwebp encoder bundled.
 ### SHA256
 See checksum.txt asset.
 
-**Docs:** https://photo-toolbox.vercel.app/lightroom-plugin
+**Docs:** https://www.photo-toolbox.fr/lightroom-plugin
 EOF
 )"
 

@@ -3,7 +3,7 @@
 ## [Unreleased]
 
 ### Added
-- Update checker: calls `photo-toolbox.vercel.app/api/plugin/latest` on export dialog open
+- Update checker: calls `www.photo-toolbox.fr/api/plugin/latest` on export dialog open
 - Shows Lightroom bezel notification when a newer version is available
 - Silent on network errors (double `LrTasks.pcall`)
 - Bundled `JSON.lua` (rxi/json.lua, MIT license) for JSON decoding

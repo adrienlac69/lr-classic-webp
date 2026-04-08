@@ -2,7 +2,7 @@
 
 Export your photos directly to **WebP** format from Adobe Lightroom Classic. Free, open-source, no setup required.
 
-> **Download:** [photo-toolbox.vercel.app/lightroom-plugin](https://photo-toolbox.vercel.app/lightroom-plugin)
+> **Download:** [www.photo-toolbox.fr/lightroom-plugin](https://www.photo-toolbox.fr/lightroom-plugin)
 
 ## Features
 
@@ -28,7 +28,7 @@ Export your photos directly to **WebP** format from Adobe Lightroom Classic. Fre
 
 ## Installation
 
-1. [Download the ZIP](https://photo-toolbox.vercel.app/lightroom-plugin) and extract it
+1. [Download the ZIP](https://www.photo-toolbox.fr/lightroom-plugin) and extract it
 2. In Lightroom Classic: **File → Plug-in Manager → Add**
 3. Select the `photo-toolbox-webp.lrplugin` folder
 4. Export via **File → Export** → choose **WebP (Photo Toolbox)**
