@@ -16,13 +16,13 @@ Lightroom Classic export plugin that converts photos to WebP format using bundle
 Adrien Lacour / Photo Toolbox
 
 ## Current Milestone
-**M1 COMPLETE — Core export functionality**
+**M2 IN PROGRESS — Photo Toolbox integration**
 
-**Next priority:** M2 — Photo Toolbox integration (download hosting on Vercel, marketing page)
+Done: Vercel hosting, update checker, resize in pixels
+Next: output folder picker, file naming, batch progress, localization
 
 ## Binaries
 - `cwebp` 1.4.0 bundled in `bin/mac/cwebp` and `bin/win/cwebp.exe`
-- SHA256 of distribution ZIP in `checksum.txt`
 - Downloaded from official Google libwebp releases
 
 ## Conventions
@@ -40,7 +40,7 @@ photo-toolbox-webp.lrdevplugin/
 ├── Info.lua                  # Plugin metadata & registration
 ├── ExportServiceProvider.lua # Export service entry point
 ├── ExportDialog.lua          # UI for export settings
-├── WebPExporter.lua          # Core cwebp invocation logic
+├── WebPExporter.lua          # Core cwebp invocation logic + resize
 ├── JSON.lua                  # JSON decoder (rxi/json.lua, MIT)
 ├── bin/
 │   ├── mac/cwebp             # macOS arm64 binary (cwebp 1.4.0)
@@ -53,10 +53,9 @@ photo-toolbox-webp.lrdevplugin/
 ```
 
 ## Distribution
-- **GitHub Release:** [v1.0.0](https://github.com/adrienlac69/lr-classic-webp/releases/tag/v1.0.0)
-- **ZIP URL:** `https://github.com/adrienlac69/lr-classic-webp/releases/download/v1.0.0/photo-toolbox-webp-v1.0.0.zip`
-- **Checksum:** `SHA256: 64245a80ea1b4b658bd226416347768b2c1df7e98a9677734bc29d51635595e6`
-- **Published:** 2026-04-07
+- **Distribution method:** GitHub Releases only (no ZIP in repo)
+- **Latest release:** [v1.0.0](https://github.com/adrienlac69/lr-classic-webp/releases/tag/v1.0.0)
+- **Release workflow:** tag → `gh release create` with ZIP + checksum as assets
 
 ## Build & Test
 - **Dev install:** Symlink or copy `.lrdevplugin` folder into LR Classic plugin directory
@@ -64,4 +63,4 @@ photo-toolbox-webp.lrdevplugin/
 - **Windows:** `%APPDATA%\Adobe\Lightroom\Modules\`
 - **Logs:** Check `~/Library/Logs/Adobe/Lightroom/LrClassicLogs/` or LR plugin manager log
 - **Lua syntax check:** `luac -p *.lua` (requires lua5.1)
-- **Distribution:** `photo-toolbox-webp-v1.0.0.zip` with checksum in `checksum.txt`
+- **Package release:** ZIP the `.lrplugin` folder, generate SHA256 checksum, upload via `gh release create`

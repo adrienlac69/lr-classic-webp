@@ -1,5 +1,8 @@
 # Photo Toolbox WebP Export — Lightroom Classic Plugin
 
+[![GitHub release](https://img.shields.io/github/v/release/adrienlac69/lr-classic-webp)](https://github.com/adrienlac69/lr-classic-webp/releases/latest)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 Export your photos directly to **WebP** format from Adobe Lightroom Classic. Free, open-source, no setup required.
 
 > **Download:** [www.photo-toolbox.fr/lightroom-plugin](https://www.photo-toolbox.fr/lightroom-plugin)
@@ -9,13 +12,14 @@ Export your photos directly to **WebP** format from Adobe Lightroom Classic. Fre
 - **Lossy & lossless** WebP compression via bundled `cwebp` 1.4.0
 - Quality slider (0–100), preset selection (photo, drawing, icon, text)
 - Compression method control (0–6: speed vs size tradeoff)
+- **Resize output** in pixels (max width / max height, aspect ratio preserved)
 - Metadata preservation: EXIF, XMP, ICC profiles, or strip all
 - Batch export with progress bar and cancel support
-- macOS Apple Silicon and Windows 10/11 x64
+- **Auto update checker** — notifies when a new version is available
+- macOS Apple Silicon (arm64) and Windows 10/11 x64
 
 ## Export Dialog
 
-<!-- TODO: Replace with actual screenshot -->
 ```
 ┌─ WebP Settings ──────────────────────────────┐
 │ Quality:    [====████████░░░░░] 80  [80]     │
@@ -23,6 +27,10 @@ Export your photos directly to **WebP** format from Adobe Lightroom Classic. Fre
 │ Method:     [====████░░] 4       [4]         │
 │ Lossless:   [ ] Enable lossless compression  │
 │ Metadata:   [All            ▾]               │
+│ ──────────────────────────────────────────── │
+│ Resize:     [✓] Resize output (pixels)       │
+│ Max width:  [1920  ] px  (0 = auto)          │
+│ Max height: [0     ] px  (0 = auto)          │
 └──────────────────────────────────────────────┘
 ```
 
@@ -56,7 +64,7 @@ photo-toolbox-webp.lrdevplugin/
 ├── Info.lua                  # Plugin metadata
 ├── ExportServiceProvider.lua # Export service entry point
 ├── ExportDialog.lua          # Settings UI
-├── WebPExporter.lua          # cwebp invocation
+├── WebPExporter.lua          # cwebp invocation + resize
 ├── JSON.lua                  # JSON decoder (rxi/json.lua, MIT)
 ├── bin/
 │   ├── mac/cwebp             # macOS arm64 (cwebp 1.4.0)
@@ -64,6 +72,10 @@ photo-toolbox-webp.lrdevplugin/
 ├── resources/icon.png
 └── strings/{en,fr}.lua
 ```
+
+## Version
+
+Current: **1.1.0** — See [CHANGELOG.md](CHANGELOG.md) for details.
 
 ## License
 

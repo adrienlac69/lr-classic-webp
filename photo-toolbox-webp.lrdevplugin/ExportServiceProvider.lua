@@ -45,7 +45,7 @@ function exportServiceProvider.startDialog(props)
                 return json.decode(body)
             end)
             if parsed_ok and data and data.version then
-                local current = "1.0.0"
+                local current = "1.1.0"
                 if data.version ~= current then
                     LrDialogs.showBezel(
                         "Photo Toolbox WebP v" .. data.version
