@@ -1,0 +1,72 @@
+name: Create Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version tag (e.g. v1.1.0)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify Info.lua version
+        run: grep VERSION photo-toolbox-webp.lrplugin/Info.lua
+
+      - name: Build ZIP
+        run: |
+          zip -r "photo-toolbox-webp-${{ github.event.inputs.version }}.zip" \
+            photo-toolbox-webp.lrplugin/ \
+            -x "*.DS_Store" -x "__MACOSX/*" -x "*.gitkeep"
+
+      - name: Generate checksum
+        run: |
+          sha256sum "photo-toolbox-webp-${{ github.event.inputs.version }}.zip" > checksum.txt
+          cat checksum.txt
+
+      - name: List ZIP contents
+        run: unzip -l "photo-toolbox-webp-${{ github.event.inputs.version }}.zip"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.version }}
+          name: "Photo Toolbox WebP Export ${{ github.event.inputs.version }}"
+          body: |
+            ## What's new in ${{ github.event.inputs.version }}
+
+            ### Resize output
+            Set max width / max height in pixels directly in the export dialog.
+            Use 0 for auto (preserves aspect ratio).
+
+            ### Update checker
+            The plugin now checks for new versions on startup (silent, no popup if up to date).
+
+            ### macOS Gatekeeper fix
+            Quarantine attribute is cleared automatically on first run — no more Terminal commands.
+
+            ---
+
+            ### Installation
+            1. Download the ZIP below
+            2. Unzip → Lightroom Classic → File → Plug-in Manager → Add
+            3. Select the `photo-toolbox-webp.lrplugin` folder
+
+            **Plugin page:** https://www.photo-toolbox.fr/lightroom-plugin
+
+            ### Compatibility
+            - Lightroom Classic 6.0+
+            - macOS Apple Silicon (arm64) + Windows x64
+            - cwebp 1.4.0 (Google libwebp)
+
+            ### SHA256
+            See `checksum.txt` asset.
+          files: |
+            photo-toolbox-webp-${{ github.event.inputs.version }}.zip
+            checksum.txt
