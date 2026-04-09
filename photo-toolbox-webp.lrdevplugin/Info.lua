@@ -10,5 +10,5 @@ return {
         file     = "ExportServiceProvider.lua",
     },
 
-    VERSION = { major = 0, minor = 1, revision = 0, build = 1 },
+    VERSION = { major = 1, minor = 1, revision = 0, build = 1 },
 }

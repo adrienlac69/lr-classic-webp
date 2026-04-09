@@ -3,7 +3,7 @@
 ## Requirements
 
 - Adobe Lightroom Classic **6.0** or later
-- macOS (Apple Silicon or Intel) or Windows 10/11 (64-bit)
+- macOS Apple Silicon (arm64) or Windows 10/11 (x64)
 
 ## Install the Plugin
 
@@ -25,6 +25,7 @@
    - **Preset**: photo, drawing, icon, text, etc.
    - **Method** (0–6): higher = slower but smaller files
    - **Metadata**: all, EXIF, XMP, ICC, or none
+   - **Resize**: enable and set max width/height in pixels (0 = auto, preserves aspect ratio)
 5. Choose your export destination and click **Export**.
 
 ## Troubleshooting
