@@ -36,7 +36,7 @@ function exportServiceProvider.startDialog(props)
     LrTasks.startAsyncTask(function()
         local ok, body = LrTasks.pcall(function()
             local result, _ = LrHttp.get(
-                "https://photo-toolbox.vercel.app/api/plugin/latest"
+                "https://www.photo-toolbox.fr/api/plugin/latest"
             )
             return result
         end)
@@ -49,7 +49,7 @@ function exportServiceProvider.startDialog(props)
                 if data.version ~= current then
                     LrDialogs.showBezel(
                         "Photo Toolbox WebP v" .. data.version
-                        .. " available \xe2\x80\x94 photo-toolbox.vercel.app",
+                        .. " available \xe2\x80\x94 www.photo-toolbox.fr",
                         4
                     )
                 end
